@@ -1,0 +1,70 @@
+body{font:bold 20px "Microsoft YaHei",微软雅黑;}
+ul ,li ,form{padding:0px;margin:0px}
+.dialog {
+    background-color: #FFFFFF;
+    border: 1px solid #C0C2C4;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+    color: #5B636B;
+    display: inline-block;
+    position: absolute;
+    z-index: 3;
+	width: 400px; height: 200px;display:none;
+}
+#oMask {  display:none; position:absolute;top:0;left:0;border:1px solid #000;width:100px;height:100px;zoom:1; }
+.dialog-close {
+    background: url("../img/dialog.png") no-repeat scroll 0 -16px transparent;
+    cursor: pointer;
+    height: 16px;
+    position: absolute;
+    right: 9px;
+    top: 8px;
+    width: 16px;
+}
+.dialog-close:hover {
+    background-position: 0 -32px;
+}
+.dialog-title {
+    -moz-user-select: none;
+    background-image: linear-gradient(#ECECEC, #DFDFDF);
+    border-bottom: 1px solid #C2C2C2;
+    border-radius: 4px 4px 0 0;
+    color: #5B636B;
+    cursor: move;
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 24px;
+    margin: 0 0 5px;
+    padding: 4px 8px;
+    text-align: left;
+}
+.dialog-content {
+    font-size: 13px;
+    padding: 0 10px;
+	height: 140px;
+}
+.dialog-button{
+	font-size: 15px;
+    padding: 2 10px;
+	position:relative;
+}
+.dialog-button-wrapper{
+	position:absolute;
+	left:210px;top:-2px;
+}
+.dialog-button span {
+	border-radius: 4px 4px 4px 4px;
+	margin:0 2px ;
+	float:left;
+	text-align:center;
+	padding:0 20px;
+	line-height:20px;
+	height:20px;
+	vertical-align:middle;
+	display:block;
+	overflow: hidden ;
+}
+.dialog-button span:hover {
+	background:#E6E6E6;
+	cursor:pointer;
+}

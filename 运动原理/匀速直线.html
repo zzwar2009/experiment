@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>simple move</title>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<style type="text/css">
+body{margin:0px;padding:0px}
+.linear{width:100px;height:100px;
+margin:0px;padding:0px;background:#e6e6e6;text-align:center;position:absolute;line-height:100px;vertical-align:middle;top:90px}
+.ease{width:100px;height:100px;
+margin:0px;padding:0px;background:#e6e6e6;text-align:center;position:absolute;line-height:100px;vertical-align:middle;top:200px}
+.bound{width:100px;height:100px;
+margin:0px;padding:0px;background:#e6e6e6;text-align:center;position:absolute;line-height:100px;vertical-align:middle;top:320px}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		var l = getDomById('linear');
+		var e = getDomById('ease');
+		var b = getDomById('bound');
+		l.onclick = function(){
+			var start = new Date();
+			linear(l,'left',500,function(){
+				var end = new Date();
+				this.innerHTML = (end-start)+'ms';
+				
+			});
+		}
+		e.onclick = function(){
+			var start = new Date();
+			ease(e,'left',500,function(){
+				var end = new Date();
+				this.innerHTML = (end-start)+'ms';
+				
+			});
+		}
+		b.onclick = function(){
+			var start = new Date();
+			bound(b,'left',500,function(){
+				var end = new Date();
+				this.innerHTML = (end-start)+'ms';
+				
+			});
+		}
+		
+		
+		
+	}
+
+	//匀速运动
+	function linear(dom,direction,target,fnCallBack){
+		dom.timer = null;
+		window.clearTimeout(dom.timer);
+		var attr = direction;
+		switch(direction){
+			case 'left':
+				direction='offsetLeft';
+				break;
+			case 'top':
+				direction='offsetTop';
+				break;
+			case 'width':
+				direction='offsetWidth';
+				break;
+			case 'height':
+				direction='offsetHeight';
+				break;
+			default :
+			alert(direction)
+			alert('不支持此方向的运动！');
+			throw new Error('不支持此方向的运动！');		
+		}
+		var step = 15;
+		if(dom[direction] == target){
+			window.clearTimeout(dom.timer);
+			if(fnCallBack){
+				fnCallBack.call(dom);
+			}
+		}else{
+			if(dom[direction]+step > target){
+				dom.style[attr] = target+'px';
+			}else if(dom[direction]+step < target){
+				dom.style[attr] = dom[direction]+step+'px';
+			}
+			dom.timer = window.setTimeout(
+				function(){
+					linear(dom,attr,target,fnCallBack)
+				},
+			30);
+		}
+		
+	}
+	//缓速运动
+	function ease(dom,direction,target,fnCallBack){
+		dom.timer = null
+		window.clearTimeout(dom.timer);
+		var attr = direction;
+		switch(direction){
+			case 'left':
+				direction='offsetLeft';
+				break;
+			case 'top':
+				direction='offsetTop';
+				break;
+			case 'width':
+				direction='offsetWidth';
+				break;
+			case 'height':
+				direction='offsetHeight';
+				break;
+			default :
+			alert(direction)
+			alert('不支持此方向的运动！');
+			throw new Error('不支持此方向的运动！');		
+		}
+		
+		var step = (target - dom[direction])/8;
+		step = step>0?Math.ceil(step):Math.floor(step);
+		if(dom[direction] == target){
+			window.clearTimeout(dom.timer);
+			if(fnCallBack){
+				fnCallBack.call(dom);
+			}
+		}else{
+			if(dom[direction]+step >= target){
+				dom.style[attr] = target+'px';
+			}else if(dom[direction]+step < target){
+				dom.style[attr] = dom[direction]+step+'px';
+			}
+			dom.timer = window.setTimeout(
+				function(){
+					ease(dom,attr,target,fnCallBack)
+				},
+			30);
+		}
+		
+	}
+	//弹性运动
+	function  bound(dom,direction,target,fnCallBack){
+		dom.timer = null
+		window.clearTimeout(dom.timer);
+		var attr = direction;
+		switch(direction){
+			case 'left':
+				direction='offsetLeft';
+				break;
+			case 'top':
+				direction='offsetTop';
+				break;
+			case 'width':
+				direction='offsetWidth';
+				break;
+			case 'height':
+				direction='offsetHeight';
+				break;
+			default :
+			alert(direction)
+			alert('不支持此方向的运动！');
+			throw new Error('不支持此方向的运动！');		
+		}
+		if(typeof dom[attr+'flexSpeed']=='undefined'){
+				dom[attr+'flexSpeed']=0;
+		}
+		if(typeof dom[attr+'flag']=='undefined'){
+			dom[attr+'flag']=0;
+		}
+		if(dom[attr+'flag']>3){
+			window.clearTimeout(dom.timer);
+			if(fnCallBack){
+				fnCallBack.call(dom);
+			}
+		}else{
+			var acceleration=9;
+			dom[attr+'flexSpeed']+=acceleration;
+			dom[attr+'flexSpeed']*=0.93;
+			if(dom[direction]+dom[attr+'flexSpeed']>target){
+				dom.style[attr]=target+'px';
+				dom[attr+'flexSpeed']*=-1;
+				dom[attr+'flag']++
+			}else{
+				dom.style[attr]=dom[direction]+dom[attr+'flexSpeed']+'px';
+				dom[attr+'flag']=0;
+			}
+			dom.timer = window.setTimeout(
+				function(){
+					bound(dom,attr,target,fnCallBack)
+				},
+			30);
+		}
+	}
+	function getDomById(id){
+		return document.getElementById(id);
+	}
+</script>
+</head>
+<body>
+<div id="linear" class="linear">linear</div>
+<div id="ease" class="ease">ease</div>
+<div id="bound" class="bound">bound</div>
+</body>
+</html>

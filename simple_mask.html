@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>simple dialog</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="css/simple_mask.css">
+<script type="text/javascript" src="js/simple_mask.js"></script>
+<style type='text/css'>
+button{
+	margin:4px 4px;
+	padding:4px 6px;
+	border:1px solid #eee;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-o-border-radius:5px;
+	-ms-border-radius:5px;
+	background:#F80297;
+	color:#fff;
+	font-size:12px;
+	font-family:"微软雅黑",Microsoft Yahei;
+	cursor:pointer;
+}
+span.t1{
+	margin-left:20px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#open').click(function(){
+		$.mask("open");
+		window.setTimeout(function(){
+			$.mask('close');
+		},5000)
+	})
+})
+</script>
+</head>
+<body>
+	<button id='open'>open mask</button>
+	<p><span class='t1'></span><p>
+</body>
+</html>
+

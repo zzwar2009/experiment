@@ -1,0 +1,27 @@
+*{margin:0px;padding:0px}
+body{
+	font-family: 微软雅黑, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	color: #333333;
+}
+@font-face {
+    /* font-properties */
+    font-family: MontserratBold;
+    src:url('font/montserrat-bold.eot'),  
+	url('font/montserrat-bold.svg'),
+	url('font/montserrat-bold.woff'),
+	url('font/montserrat-bold.ttf'); /* IE9 */
+}
+@font-face {
+    /* font-properties */
+    font-family: MontserratRegular;
+    src:url('font/montserrat-regular.eot'),  
+	url('font/montserrat-regular.svg'),
+	url('font/montserrat-regular.woff'),
+	url('font/montserrat-regular.ttf'); /* IE9 */
+}
+/*滚动条*/
+::-webkit-scrollbar {width: 8px;height: 8px;}
+::-webkit-scrollbar-track-piece {width: 11px;height: 11px;}
+::-webkit-scrollbar-thumb {border-width: 1px;border-style: solid;border-color: #fff;border-radius: 6px;background: #cecece;}
+::-webkit-scrollbar-thumb :hover {background: #c5c5c5;}

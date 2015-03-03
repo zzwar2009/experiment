@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>各种轮播</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/simple_move.js"></script>
+<style type="text/css">
+	body{margin:0px;padding:0px}
+	*{margin:0;padding:0;}
+	body{
+		padding-left: 200px;
+	}
+	.box{
+		width:500px;
+		height:300px;
+		overflow: hidden;
+		position: relative;
+	}
+	.boxWrapper{
+		list-style: none;
+		width:4000px;	
+		position: absolute;
+		left:0px;
+		top:0px;
+	}
+	.boxWrapper li{
+		float :left;
+		width:500px;
+		height:300px;
+	}
+	.boxWrapper li img{
+		width:500px;
+		height:300px;
+	}
+	.sep{
+		height: 1px;
+		width: 100%;
+		background: #eee;
+		margin:20px 0px;
+		clear:both;
+
+	}
+	.btn{
+		padding: 4px 6px;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+		-ms-border-radius: 5px;
+		background: #F80297;
+		color: #fff;
+		font-size: 12px;
+		font-family: "微软雅黑",Microsoft Yahei;
+		cursor: pointer;
+	}
+	.fl{
+		float:left;
+	}
+	.mt20{
+		margin-top: 20px;
+	}
+	.mr20{
+		margin-right: 20px;
+	}
+	.progress_item{
+		width:24px;
+		height:5px;
+		background: #eee;
+		display: inline-block;
+		margin-right: 10px;
+		position: relative;
+	}
+	.progress_item a{
+		position: absolute;
+		left:0px;
+		top:0px;
+		height: 100%;
+		width: 0%;
+		background: #4884A7;
+	}
+	.progress_item.current{
+		background: #68C4F8;
+	}
+	.inner{
+		list-style: none;
+		width:500px;
+		height:300px;
+		position: absolute;
+		left:0px;
+		top:0px
+	}
+	.inner li{
+		width:500px;
+		height:300px;
+		position: absolute;
+		left:0px;
+		top:0px;
+	}
+	.inner li img{
+		width:500px;
+		height:300px;
+	}
+	.box .page{
+		width:20px;
+		height:20px;
+		border-radius: 50%;
+		background: #E4393C;
+		color:#fff;
+		font-size: 10px;
+		font-family: verdana;
+		text-align: center;
+		line-height: 20px;
+		display: inline-block;
+		margin-right: 10px;
+		cursor: pointer;
+	}
+	.pageWrapper{
+		position: absolute;
+		bottom: 5px;
+		right: 20px;
+		z-index: 3;
+	}
+	.tbox{
+		position: absolute;
+		left:0px;
+		top:0px;
+		width:500px;
+		height:3000px;
+		list-style: none;
+	}
+	.tbox li{
+		width:500px;
+		height:300px;
+	}
+	.tbox li img{
+		width:500px;
+		height:300px;
+	}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//轮播效果
+		(function(window){
+			var autoTimer=null;
+			var length = $('.boxWrapper li ').length;
+			var width = $('.boxWrapper li ').eq(0).outerWidth();
+			var step = 0;
+			var currentIndex;
+			//复制第一个
+			$('.boxWrapper li ').eq(0).clone().appendTo($('.boxWrapper'));
+
+			var cur = $('.progress_item.current').children('a');
+			cur.animate({width:'100%'},3000);
+			autoTimer = window.setTimeout(autoMove,3000);
+
+			function autoMove(){
+				step++;
+				if(step == length+1){
+					$('.boxWrapper').get(0).style.left = 0;
+					step = 1;
+				}
+				var dis = -step*width;
+				$('.boxWrapper').stop();
+				$('.boxWrapper:not(:animated)').animate({left:dis});
+				
+
+				currentIndex = step
+				if(step==length){
+					currentIndex =0
+				}
+				
+
+				$('.progress_item').eq(currentIndex).addClass('current').siblings().removeClass('current');
+
+				$('.progress_item').find('a').stop().css({width:'0'});
+
+				var cur = $('.progress_item.current').children('a');
+				cur.animate({width:'100%'},3000);
+
+				autoTimer = window.setTimeout(autoMove,3000);
+			}
+			$('.boxWrapper li ').mouseover(function(){
+				window.clearTimeout(autoTimer)
+			})
+			$('.boxWrapper li ').mouseout(function(){
+				step = $(this).index();
+				autoMove();
+			});
+			$('.prev').click(function(){
+				window.clearTimeout(autoTimer);
+				step--;
+				if(step<=0){
+					step = 0;
+				}
+
+				$('.progress_item').find('a').stop().css({width:'0'});
+				$('.progress_item').eq(step).addClass('current').siblings().removeClass('current');
+				var cur = $('.progress_item.current').children('a');
+				cur.animate({width:'100%'},3000);
+
+				var dis = -step*width;
+				$('.boxWrapper').stop();
+				$('.boxWrapper:not(:animated)').animate({left:dis});
+				//autoMove();
+				autoTimer = window.setTimeout(autoMove,3000)
+			});
+
+			$('.next').click(function(){
+				window.clearTimeout(autoTimer);
+				step++;
+				if(step>=length){
+					step =length; 
+				}
+				
+				$('.progress_item').find('a').stop().css({width:'0'});
+				$('.progress_item').eq(step).addClass('current').siblings().removeClass('current');
+				var cur = $('.progress_item.current').children('a');
+				cur.animate({width:'100%'},3000);
+
+				var dis = -step*width;
+				$('.boxWrapper').stop();
+				$('.boxWrapper:not(:animated)').animate({left:dis});
+				autoTimer = window.setTimeout(autoMove,3000)
+				//autoMove();
+			});
+			
+		})(window);
+		
+		//淡入淡出效果
+		(function(window){
+			var index ;
+			//init
+			var length = $('.boxWrapper li ').length;
+			for ( var i =0;i<length;i++){
+				$('.inner li').eq(i).css({zIndex:1});
+			}
+			$('.inner li').eq(0).css({opacity:1}).siblings().css({opacity:0});
+
+
+
+
+			$('.pageWrapper .page').mouseover(function(){
+				index = $(this).attr('index');
+				$('.inner li').stop();
+
+				$('.inner li').eq(index).siblings().animate({opacity:0});
+				$('.inner li').eq(index).animate({opacity:1},1000);
+				//$('.inner li').eq(index).css({zIndex:2});
+			});
+			$('.pageWrapper .page').mouseout(function(){
+				index = $(this).attr('index');
+			});
+
+		})(window);
+
+		//上下滚动
+		(function(window){
+
+			var autoTimer=null;
+			var length = $('.tbox li ').length;
+			var height = $('.tbox li ').eq(0).outerHeight();
+			var step = 0;
+			var currentIndex;
+			//复制第一个
+			$('.tbox li ').eq(0).clone().appendTo($('.tbox'));
+
+			autoTimer = window.setTimeout(autoMove,3000);
+
+			function autoMove(){
+				step++;
+				if(step == length+1){
+					$('.tbox').get(0).style.top = 0;
+					step = 1;
+				}
+				var dis = -step*height;
+				$('.tbox').stop();
+				$('.tbox:not(:animated)').animate({top:dis});
+				
+
+				currentIndex = step
+				if(step==length){
+					currentIndex =0
+				}
+
+				autoTimer = window.setTimeout(autoMove,3000);
+			};
+
+
+			$('.prevt').click(function(){
+				window.clearTimeout(autoTimer);
+				step--;
+				if(step<=0){
+					step = 0;
+				}
+
+
+				var dis = -step*height;
+				$('.tbox').stop();
+				$('.tbox:not(:animated)').animate({top:dis});
+				//autoMove();
+				autoTimer = window.setTimeout(autoMove,3000)
+			});
+
+			$('.nextt').click(function(){
+				window.clearTimeout(autoTimer);
+				step++;
+				if(step>=length){
+					step =length; 
+				}
+				
+				var dis = -step*height;
+				$('.tbox').stop();
+				$('.tbox:not(:animated)').animate({top:dis});
+				autoTimer = window.setTimeout(autoMove,3000)
+				//autoMove();
+			});
+
+		})(window);
+	})
+	
+</script>
+</head>
+<body>
+	<div class='fl mr20'>
+		<div class='box'>
+			<ul class='boxWrapper'>
+				<li><img src='tmp/1.jpg'/></li>
+				<li><img src='tmp/2.jpg'/></li>
+				<li><img src='tmp/3.jpg'/></li>
+			</ul>
+			
+		</div>
+		<div class='mt20'>
+			<span class='progress_item current'>
+				<a></a>
+			</span>
+			<span class='progress_item'><a></a></span>
+			<span class='progress_item'><a></a></span>
+		</div>
+		<div class='mt20' style='height:30px'>
+			<span class='prev btn'>前一张</span>
+			<span class='next btn'>后一张</span>
+		</div>
+	</div >
+
+	<div class='fl mr20'>
+		<div class='box'>
+			<ul class='tbox'>
+				<li><img src='tmp/1.jpg'/></li>
+				<li><img src='tmp/2.jpg'/></li>
+				<li><img src='tmp/3.jpg'/></li>
+			</ul>
+		</div>
+		<div class='mt20' style='height:30px'>
+			<span class='prevt btn'>前一张</span>
+			<span class='nextt btn'>后一张</span>
+		</div>
+	</div>
+
+	<div class='sep'></div>
+
+	<div class='box'>
+		<ul class='inner'>
+			<li><img src='tmp/1.jpg'/></li>
+			<li><img src='tmp/2.jpg'/></li>
+			<li><img src='tmp/3.jpg'/></li>
+		</ul>
+		<div class='pageWrapper'>
+			<a class='page' index=0 >1</a>
+			<a class='page' index=1>2</a>
+			<a class='page' index=2>3</a>
+		</div>
+	</div>
+	<div class='sep'></div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="div1" style="width:100px; height:100px; background:red; position:absolute; left:0; top:0; cursor:move"><img src="beer.png" width="100" height="100" style="border:none;" /></div>
+</body>
+</html>
+<script type="text/ecmascript">
+var nSpeed=0;
+var prePosi=0;
+var ele=document.getElementById('div1');
+var initMP={x:0,y:0}
+var initEP={x:0,y:0}
+function down(e){
+	var e=e||window.event;
+	initMP.x=e.clientX;
+	initMP.y=e.clientY;
+	initEP.x=ele.offsetLeft;
+	initEP.y=ele.offsetTop;
+	
+	if(ele.setCapture){
+		ele.setCapture();
+		ele.onmousemove=move;
+		ele.onmouseup=up;
+	}else{
+		document.onmousemove=move;
+		document.onmouseup=up;
+	}
+	
+	return false;
+}
+
+function move(e){
+	var e=e||window.event;
+	if(prePosi)
+		nSpeed=e.clientX-prePosi;
+		
+	ele.style.left=initEP.x+(e.clientX-initMP.x)+'px';
+	ele.style.top=initEP.y+(e.clientY-initMP.y)+'px';	
+	prePosi=e.clientX;//左右的
+	
+}
+
+function up(e){
+	
+	if(ele.releaseCapture){
+		ele.releaseCapture()
+		ele.onmousemove=null;
+		ele.onmouseup=null;
+		
+	}
+	document.onmousemove=null;
+	document.onmouseup=null;
+	ele.innerHTML=nSpeed;
+	 Hmove()
+	
+}
+ele.onmousedown=down;
+
+
+var timer=null;
+function Hmove(){
+	window.clearTimeout(timer);
+	if(ele.offsetLeft+nSpeed>=900){
+		ele.style.left=900+'px';
+		nSpeed*=-1;
+		
+	}else if(ele.offsetLeft+nSpeed<=0){
+		ele.style.left=0+'px';
+		nSpeed*=-1;
+	}else {
+		ele.style.left=ele.offsetLeft+nSpeed+'px';
+	}
+	nSpeed*=0.93;
+	timer=window.setTimeout(Hmove,30);	
+}
+</script>

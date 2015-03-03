@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+#drag{width:100px;height:100px;background:red;text-align:center;line-height:80px;position:absolute}
+
+</style>
+</head>
+
+<body>
+<div id="drag">简单拖拽</div>
+</body>
+</html>
+<script type="text/javascript">
+var dragbox = document.getElementById("drag");
+var boxPosition={x:0,y:0}
+var mousePosition ={x:0,y:0}
+function down(e){
+	e = e || window.event;
+	//初始化元素位置
+	boxPosition.x = dragbox.offsetLeft;
+	boxPosition.y = dragbox.offsetTop;
+	mousePosition.x = e.clientX;
+	mousePosition.y = e.clientY;
+	
+	if(dragbox.setCapture){
+		console.log(3333)
+		dragbox.setCapture();
+		dragbox.onmousemove=move;
+		dragbox.onmouseup=up;
+	}else{
+		document.onmousemove=move;
+		document.onmouseup=up;
+	}
+	
+	return false;
+
+	
+}
+function up(e){
+
+	if(dragbox.releaseCapture){
+		dragbox.releaseCapture()
+		dragbox.onmousemove=null;
+		dragbox.onmouseup=null;
+		
+	}
+	document.onmousemove=null;
+	document.onmouseup=null;
+	
+}
+function move(e){
+
+	e = e || window.event;
+	dragbox.style.left = boxPosition.x+(-mousePosition.x+e.clientX)+"px";
+	dragbox.style.top = boxPosition.y+(-mousePosition.y+e.clientY)+"px";
+	
+	
+}
+dragbox.onmousedown = down;
+
+</script>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>simple dialog</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="css/public.css">
+<link rel="stylesheet" type="text/css" href="css/simple_mask.css">
+<script type="text/javascript" src="js/simple_mask.js"></script>
+<link rel="stylesheet" type="text/css" href="css/simple_dialog.css">
+<script type="text/javascript" src="js/simple_util.js"></script>
+<script type="text/javascript" src="js/simple_dragable.js"></script>
+<script type="text/javascript" src="js/simple_move.js"></script>
+<script type="text/javascript" src="js/simple_dialog.js"></script>
+<style type='text/css'>
+button{
+	margin:4px 4px;
+	padding:4px 6px;
+	border:1px solid #eee;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-o-border-radius:5px;
+	-ms-border-radius:5px;
+	background:#F80297;
+	color:#fff;
+	font-size:12px;
+	font-family:"微软雅黑",Microsoft Yahei;
+	cursor:pointer;
+}
+span.t1{
+	margin-left:20px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#open').click(function(){
+		//1遮罩 2.拖拽 
+		var option ={
+			width:700,
+			height:300,
+			title:' 对话框',
+			mask:true,
+			buttons:[
+				{text:'确定',cls:'blue',handler:function(){
+					alert('确定');
+				}},
+				{text:'取消',cls:'',handler:function(){
+					//$('#dlg').dialog('close');
+					simple.dialog.close('#dlg');
+				}}
+			]
+		}
+		simple.dialog.init('#dlg',option);
+	})
+})
+</script>
+</head>
+<body>
+<!--
+<div class='dialog'>
+	<h2 class='dialog_tit'>标准Dialog</h2>
+	<div class='dialog_content'>
+		fdsff</br>sfdf</br>sfsdf</br>df
+	</div>
+	<div class='dialog_close'></div>
+	<div class='button_wrapper'>
+		<span class='btn blue'>确定</span>
+		<span class='btn'>取消</span>
+	</div>
+</div>
+-->
+<button id='open'>open dialog</button>
+<div id='dlg' style='display:none'>
+	<h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p>
+	<h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p><h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p><h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p><h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p>
+	<h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p>
+	<h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p><h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p><h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p><h3>简单的dialog实现</h3>
+	<p>内容内容内容内容内容内容内容内容内容内容</p>
+</div>
+<p><span class='t1'>需要遮罩 需要drag 带点运动效果 close 方法读不到全局的option</span><p>
+</body>
+</html>
+

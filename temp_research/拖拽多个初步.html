@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+#content{ position:relative; list-style:none; padding:0; margin:50px auto; border:none; width:480px; background:#0CF; height:660px;  }
+#content li{ float:left; margin:5px;background:#FF9;  }
+#content li img{ border:none;}
+</style>
+</head>
+
+<body>
+<ul id="content">
+	<li><img src="img/1.png" width="150" height="150" /></li>
+    <li><img src="img/2.png" width="150" height="150"  /></li>
+    <li><img src="img/3.png"  width="150" height="150" /></li>
+    <li><img src="img/4.png"  width="150" height="150"  /></li>
+    <li><img src="img/5.png"  width="150" height="150"  /></li>
+    <li><img src="img/6.png"  width="150" height="150"  /></li>
+    <li><img src="img/7.png"  width="150" height="150"  /></li>
+    <li><img src="img/8.png"  width="150" height="150"  /></li>
+    <li><img src="img/9.png"  width="150" height="150"  /></li>
+   <li><img src="img/10.png"  width="150" height="150"  /></li>
+   <li><img src="img/11.png"  width="150" height="150"  /></li>
+   <li><img src="img/12.png"  width="150" height="150"  /></li>
+</ul>
+</body>
+</html>
+<script type="text/ecmascript" src="js/event.js"></script>
+<script type="text/ecmascript" src="js/dom121113.js"></script>
+<script type="text/ecmascript" src="js/zhufengEffect.js"></script>
+<script type="text/ecmascript">
+var olis = document.getElementById("contnet").getElementsByTagName("li");
+for(var i=0;i<olis.length;i++){
+	var boxPosition = {x:0,y:0};
+	olis[i].boxPosition.x = olis[i].offsetLeft;
+	olis[i].boxPosition.y = olis[i].offsetTop;
+	
+	
+}
+var mousePosition ={x:0,y:0}
+function down(e){
+	e = e || window.event;
+	//初始化元素位置
+	boxPosition.x = dragbox.offsetLeft;
+	boxPosition.y = dragbox.offsetTop;
+	mousePosition.x = e.clientX;
+	mousePosition.y = e.clientY;
+	
+	if(dragbox.setCapture){
+		console.log(3333)
+		dragbox.setCapture();
+		dragbox.onmousemove=move;
+		dragbox.onmouseup=up;
+	}else{
+		document.onmousemove=move;
+		document.onmouseup=up;
+	}
+	
+	return false;
+
+	
+}
+function up(e){
+
+	if(dragbox.releaseCapture){
+		dragbox.releaseCapture()
+		dragbox.onmousemove=null;
+		dragbox.onmouseup=null;
+		
+	}
+	document.onmousemove=null;
+	document.onmouseup=null;
+	
+}
+function move(e){
+
+	e = e || window.event;
+	dragbox.style.left = boxPosition.x+(-mousePosition.x+e.clientX)+"px";
+	dragbox.style.top = boxPosition.y+(-mousePosition.y+e.clientY)+"px";
+	
+	
+}
+dragbox.onmousedown = down;
+</script>

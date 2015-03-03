@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>解析json两种方法</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type='text/javascript'>
+	
+	var str ="{a:'fdsf',b:'fdsfs',v:'fdfd'}";
+	function parse(str){
+		return eval("("+str+")");
+	}
+	function parse1(str){
+		return new Function("return"+str)();
+	}
+	console.log(parse1(str));
+
+	function bind(fn,obj){
+		return function(){
+			fn.apply(obj,arguments)
+		}
+	}
+	function test(){
+		this.a ='a'
+	}
+	var obj = {};
+	bind(test,obj);
+</script>

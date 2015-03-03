@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>simple date</title>
+<link rel="stylesheet" href="css/simple_date.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type='text/javascript'>
+    $(document).ready(function(){
+		var iNow=0; 
+		var oUl = document.getElementById('dates');
+		var title = document.getElementById('date_tit');
+		initDate();
+		$('.simple_date_next').off('click').on('click',function(){
+			$(oUl).addClass('ani');
+			
+			iNow++;
+			initDate();
+			
+			
+		});
+		$('.simple_date_prev').off('click').on('click',function(){
+			$(oUl).addClass('ani');
+			iNow--;
+			initDate();
+		});
+		
+		//获取某月一号是星期几 就是留几个空白
+		function getFirstDay(){
+			var oDate=new Date();
+			oDate.setMonth(oDate.getMonth()+iNow);
+			oDate.setDate(1);
+			return oDate.getDay();	
+		}
+		//获取最后一天是星期几
+		function getLastDay(){
+			var oDate=new Date();
+			oDate.setMonth(oDate.getMonth()+iNow);
+			oDate.setDate(getMonthDay());
+			return oDate.getDay();	
+		}
+		//获取某月有多少天
+		function getMonthDay(month){
+			
+			var oDate=new Date();
+			if(month!=null){
+				oDate.setMonth(oDate.getMonth()+month);
+			}else{
+				oDate.setMonth(oDate.getMonth()+iNow);
+			}
+			oDate.setMonth(oDate.getMonth()+1);
+			oDate.setDate(0);
+			return oDate.getDate();	
+		}
+		function setTitle(){
+			var oDate=new Date();
+			oDate.setMonth(oDate.getMonth()+iNow);
+			title.innerHTML=oDate.getFullYear()+'年'+(oDate.getMonth()+1)+'月';
+		}
+		function initDate(){
+			oUl.innerHTML = '';
+			var frags = document.createDocumentFragment();
+			var d = getFirstDay();
+			var m = getMonthDay();
+			if(d==0)d=7;//周日
+			if(d==1)d=8;//周一
+			d--;
+			var lastMonthDays = getMonthDay(iNow-1);
+			var lastMonthStart = lastMonthDays-d+1;
+			//设置空白
+			for(var i=0; i<d; i++){
+				var oLi=document.createElement('li');
+				if(iNow<=0){
+					oLi.className = 'pass';
+				}
+				oLi.innerHTML = lastMonthStart++;
+				frags.appendChild(oLi);
+			}
+			
+			for(var i=0; i<m; i++){
+				var oLi=document.createElement('li');
+				oLi.innerHTML=i+1;
+				frags.appendChild(oLi);
+			}
+			
+			
+			lastday =getLastDay();
+			var total = frags.children.length;
+			//证明是最后一排补齐即可
+			if (total>35){
+				lastday = 7-lastday;
+			}else{
+				if(lastday == 0){
+					lastday = 7;
+				}else{
+					lastday = 7-lastday+7;
+				}
+			}
+			
+			var k = 1;
+			//用下个月补齐
+			for(var i=0; i<lastday; i++){
+				var oLi=document.createElement('li');
+				oLi.innerHTML = k++;
+				oLi.className = 'nextmonth';
+				frags.appendChild(oLi);
+			}
+			
+			oUl.appendChild(frags);	
+			console.log(iNow)
+			if(iNow<0){
+				for(var i=0; i<oUl.children.length; i++){
+					oUl.children[i].className='pass';
+				}
+			}else if(iNow == 0){
+				//本月过去的变灰
+				var oDate=new Date();
+				oDate.setMonth(oDate.getMonth()+iNow);
+				var toDay=oDate.getDate();
+				for(var i=0; i<oUl.children.length; i++){
+					if(oUl.children[i].innerHTML<toDay && !/nextmonth/.test(oUl.children[i].className)){
+						oUl.children[i].className='pass';
+					}else if(oUl.children[i].innerHTML==toDay && !/nextmonth/.test(oUl.children[i].className)){
+						oUl.children[i].className='active';
+					}
+				}
+			}
+			for(var i=0; i<oUl.children.length; i++){
+				if(i%7==5 || i%7==6){
+					oUl.children[i].className='week';	
+				}
+			}
+			
+			if(iNow == 0){
+				setTitle();
+
+			}
+			window.setTimeout(function(){
+				setTitle();
+				$(oUl).removeClass('ani');
+			},1000);
+		}
+		});
+</script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="title">
+            <h3 id='date_tit'></h3>
+            <div class="opention">
+                <a class="simple_date_prev"></a><a class="simple_date_next"></a>
+            </div>
+        </div>
+        <div class="cont">
+            <ul class="list one">
+               
+                <li>一</li>
+                <li>二</li>
+                <li>三</li>
+                <li>四</li>
+                <li>五</li>
+                <li>六</li>
+			    <li>日</li>
+            </ul>
+            <ul class="list" id='dates'>
+                
+            </ul>
+        </div>
+    </div>
+<br><br><br><br>
+</body>
+</html>

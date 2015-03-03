@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> 动画原理+回调方法</title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <meta content ="text/html" charset="utf-8">
+ </head>
+
+ <body>
+ <div id="div1" style="width:100px;height:100px;position:absolute;background:green;top:0;left:0;"></div> 
+ </body>
+ <script type="text/javascript">
+ var obj1 = {width:400,height:400,top:250,left:500,opacity:0.7}
+ var oDiv = document.getElementById("div1");
+ //oDiv.onclick = function(){move(this,'opacity',0,0.8,function(){alert('callback')})}
+ oDiv.onclick = function(){moveAdvance(this,obj1,function(){this.style.backgroundColor = 'red'})}
+ //oDiv.onclick = move;
+ //左右上下位移 宽高  透明度  以这5个维度来演示
+ //向右
+ oDiv.style.left = oDiv.offsetLeft +5+'px';
+ oDiv.style.left = parseInt(oDiv.style.left)+5+'px';
+ //向下
+ oDiv.style.top = parseInt(oDiv.style.top) +5+'px';
+ oDiv.style.height = parseInt(oDiv.style.height) +25+'px';
+ //这种方式只能获取行内样式 没有行内就不起作用
+ oDiv.style.width = parseInt(oDiv.style.width) +25+'px';
+ //不透明度有兼容性问题  标准浏览器
+ //console.log(oDiv.style.opacity)
+ //oDiv.style.opacity = oDiv.style.opacity+0.1;
+ //ie6 7 8的透明度
+ //oDiv.style.filter = 'alpha(opacity=50)';
+ /*运动基础方法 */
+ function step (ele,direction,num,target){
+	var attr = direction;
+	//var nOffset = 5;
+	if(direction == 'opacity'){
+		if (target>1 || target<0)
+		{alert('不透明度参数不合法');
+			throw new Error('透明度参数不合法')
+		}
+		if (ele.style.opacity == "" || typeof ele.style.opacity =='undefined')
+		{
+			ele.style.opacity = 1;
+			ele.style.filter = 'alpha(opacity=100)';
+		}
+		if(target>parseFloat(ele.style.opacity)){
+			var nOffset = 0.033;
+			if((parseFloat(ele.style.opacity)+nOffset)>target){
+				ele.style.opacity = target;
+				ele.style.filter = "alpha(opacity="+target*100+")";
+			}else{
+				ele.style.opacity = parseFloat(ele.style.opacity) + nOffset;
+				ele.style.filter = "alpha(opacity="+(parseFloat(ele.style.opacity)+nOffset)*100+")";
+			}	
+		}else if(target<(parseFloat(ele.style.opacity))){
+			var nOffset =-0.033;
+			if(parseFloat(ele.style.opacity)+nOffset<target){
+				ele.style.opacity = target;
+				ele.style.filter = "alpha(opacity="+target*100+")";
+			}else{
+				ele.style.opacity = (parseFloat(ele.style.opacity) +nOffset);
+				ele.style.filter = "alpha(opacity="+(parseFloat(ele.style.opacity)+nOffset)*100+")";
+			}
+		
+		}else{
+			//end
+			return  'ok';
+		}
+	
+	}else{
+		switch(direction){
+			case  'left':
+				direction ='offsetLeft';
+				break;
+			case 'top':
+				direction ='offsetTop';
+				break;
+			case 'width':
+				direction ='offsetWidth';
+				break;
+			case 'height':
+				direction ='offsetHeight';
+				break;
+			default:
+				alert('参数不对');
+				throw new Error('参数不对不支持此方向运动');
+
+		}
+		if(target>oDiv[direction]){
+			var num = 5;
+			//过界判断
+			if (ele[direction]+num>target)
+			{
+				ele.style[attr] = target+'px';
+			}else{
+				ele.style[attr] = ele[direction]+num+'px';
+			}
+
+		}else if(target<oDiv[direction]){
+			var num = -5;
+			//过界判断
+			if (ele[direction]+num<target)
+			{
+				ele.style[attr] = target+'px';
+			}else{
+				ele.style[attr] = ele[direction]+num+'px';
+			}
+		}else {
+			//到达目的地  
+			return 'ok';
+		}
+	}
+	//ele.style[attr] = ele[direction]+num+'px';
+	
+ }
+ 
+ /*首字母大写处理字符串*/
+ function processString(str){
+ if (typeof str =='string')
+	{
+		str = str.replace(/^\w/,function(s,position){
+			//alert(position)
+			return s.toUpperCase();
+			
+		})
+	}
+	alert(direction);
+ 
+ }
+ 
+ function move(ele,attr,num,target,fnCallback){
+	if(step(ele,attr,'',target)!='ok'){
+		//继续调用
+		window.setTimeout(function(){
+			move(ele,attr,'',target,fnCallback);
+		},30);
+	}else{
+		alert('finished')
+		if(fnCallback){
+			fnCallback();
+		
+		}
+	}
+ }
+ //高级动画框架demo function
+ function moveAdvance(ele,obj,fnCallback){
+	 //动画结束标记
+	var flag = false;
+	for(var attr in obj){
+		if(step(ele,attr,'',obj[attr])!='ok'){
+			flag = true;
+		
+		};	
+	}
+	if(flag){
+	window.setTimeout(function(){
+			moveAdvance(ele,obj,fnCallback);
+		},30);
+	}
+	else{
+		if(fnCallback){
+			//fnCallback();
+			fnCallback.call(ele);
+		}	
+	}
+ 
+ }
+ </script>
+</html>

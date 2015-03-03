@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/simple_font.css">
+	<link rel="stylesheet" href="css/simple_form.css">
+	<style type='text/css' >
+		*{margin: 0;padding:0}
+		body{
+			padding:200px;
+			color :#bbb;
+			font-family: 'MontserratBold','MontserratRegular';
+		}
+		button{
+		}
+		.block{
+			margin-bottom: 20px;
+		}
+	</style>
+	<script type='text/javascript' src='js/jquery.js'></script>
+	<script type='text/javascript' src='js/simple_form.js'></script>
+	<script type='text/javascript'>
+		$(document).ready(function(){
+			
+			$('#default').radio();
+			$('#red').radio({style:'red'});
+			$('#green').radio({style:'green'});
+
+			$('input[name=checkbox]').check();
+			$('input[name=radio]').radio();
+
+			$('input[name=style]').click(function(){
+				var style = $('input[name=style]:checked').val();
+				$('input[name=checkbox]').check({style:style});
+				$('input[name=radio]').radio({style:style});
+			})
+		})
+
+	</script>
+</head>
+<body>
+	<div class='block'>
+		<input type='checkbox'  id= 'c1' class='simple_check' name='checkbox'/>
+		<label for='c1'>林志玲</label>
+		<input type='checkbox'  id= 'c2' class='simple_check' name='checkbox'/>
+		<label for='c2'>田馥甄</label>
+	</div >
+	<div class='block'>
+		<input type='radio'  id= 'r1' class='simple_radio' name='radio'/>
+		<label for='r1'>林志玲</label>
+		<input type='radio'  id= 'r2' class='simple_radio' name='radio'/>
+		<label for='r2'>田馥甄</label>
+		<input type='radio'  id= 'r3' class='simple_radio' name='radio'/>
+		<label for='r3'>老干妈</label>
+	</div>
+	<div class='block'>
+		<p style='margin-bottom:20px'>选择风格</p>
+		<input type='radio'  id= 'default' class='simple_radio' name='style' value='default'/>
+		<label for='default'>默认</label>
+		<input type='radio'  id= 'red' class='simple_radio' name='style' value='red'/>
+		<label for='red'>红色</label>
+		<input type='radio'  id= 'green' class='simple_radio' name='style' value='green'/>
+		<label for='green'>绿色</label>
+	</div>
+</body>
+</html>

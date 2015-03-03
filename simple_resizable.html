@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>simple resize</title>
+<style type="text/css">
+body{margin:0px;padding:0px}
+.ui-widget-content{border:1px solid #aaa;padding:0.5em}
+.ui-resizable{position:relative;}
+.ui-resizable-handle{position:absolute;font-size:0.1px;display:block}
+.ui-resizable-e{width:5px;height:100%;top:0px;right:-5px;cursor:e-resize}
+.ui-resizable-s{width:100%;height:5px;bottom:-5px;left:0px;cursor:s-resize}
+.ui-icon{background-image: url(img/ui-icons_222222_256x240.png);width: 16px;height: 16px;}
+.ui-resizable-se{cursor:se-resize;width:12px;height:12px;right:1px;bottom:1px;}
+.ui-icon-gripsmall-diagonal-se{background-position: -64px -224px;}
+
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+</head>
+<body>
+<div id="resizable" class="ui-widget-content ui-resizable" style="width: 272px; height: 129px;">resizable
+	<div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+	<div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+	<div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#resizable').find('.ui-resizable-e').bind('mousedown',down)
+	$('#resizable').find('.ui-resizable-s').bind('mousedown',down)
+	$('#resizable').find('.ui-resizable-se').bind('mousedown',down)
+})
+function down(e){
+	this.MP=E.MOUSE(e);
+	this.EP={x:$(this).parent().get(0).offsetWidth,y:$(this).parent().get(0).offsetHeight};
+	this.move = E.fnBind(_move,this);
+	this.up = E.fnBind(_up,this);
+	
+	if(this.setCapture){
+		E.bind(this,'mousemove',_move);
+		E.bind(this,'mouseup',_up);
+		this.setCapture();
+	}else{
+		E.bind(document,'mousemove',this.move);
+		E.bind(document,'mouseup',this.up);
+	}
+}
+function _move(e){
+		var eWidth = (E.MOUSE(e).x-this.MP.x)+this.EP.x<0 ? 0:(E.MOUSE(e).x-this.MP.x)+this.EP.x;
+		var eHeight = (E.MOUSE(e).y-this.MP.y)+this.EP.y<0 ? 0:(E.MOUSE(e).y-this.MP.y)+this.EP.y;
+		if ($(this).attr('class').indexOf('ui-resizable-se')!=-1){
+			$(this).parent().get(0).style.width = eWidth+'px';
+			$(this).parent().get(0).style.height =  eHeight+'px';
+		}else if($(this).attr('class').indexOf('ui-resizable-s')!=-1){
+			$(this).parent().get(0).style.height =  eHeight+'px';
+		}else if($(this).attr('class').indexOf('ui-resizable-e')!=-1){
+			$(this).parent().get(0).style.width = eWidth+'px';
+		}
+	}
+function _up(){
+		if(this.releaseCapture){
+			E.unBind(this,'mousemove',_move);
+			E.unBind(this,'mouseup',_up);
+			this.releaseCapture();		
+		}else{	
+			E.unBind(document,'mousemove',this.move);
+			E.unBind(document,'mouseup',this.up);
+		}
+	}
+</script>

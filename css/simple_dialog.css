@@ -1,0 +1,86 @@
+/*
+* simple dialog
+* @date 2016.6.25
+* @author zhangz
+*/
+.dialog{
+	border:1px solid #eee;
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	-ms-border-radius:4px;
+	position:absolute;
+	top:0px;
+	padding:20px;
+	-moz-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+	-o-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+	-ms-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+	z-index:3;
+	padding-bottom:0px;
+}
+.dialog .dialog_tit{
+	font-size:18px;
+	color:#5B636B;
+	margin-right:20px;
+	margin-bottom:20px;
+	user-select:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	-o-user-select:none;
+	cursor:move;
+	text-align:left;	
+	font-weight:normal;
+}
+.dialog_content{
+	border:1px solid #eee;
+	padding:15px;
+	overflow:auto;
+}
+.dialog_close{
+	width:18px;
+	height:18px;
+	position:absolute;
+	top:15px;
+	right:15px;
+	background:url(../img/close.png) left top no-repeat;
+	cursor:pointer;
+	-moz-transition: all 0.5s linear;
+	-webkit-transition: all 0.5s linear;
+	-o-transition: all 0.5s linear;
+	transition: all 0.5s linear;
+}
+.dialog_close:hover{
+	-webkit-transform:rotate(90deg);
+	-ms-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-o-transform:rotate(90deg);
+	transform:rotate(90deg);
+}
+.button_wrapper{
+	margin-top:10px;
+	text-align:right;
+	font-size:0px;
+}
+.center{
+	text-align:center;
+}
+.btn{
+	display:inline-block;
+	padding:5px 9px;
+	border:1px solid #eee;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	-ms-border-radius:3px;
+	cursor:pointer;
+	background:#fff;
+	font-size:13px;
+	color :#000;
+	margin-left:6px;
+}
+.btn.blue{
+	background:#0D99FD;
+	color:#fff;
+}

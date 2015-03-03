@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>simple accordion</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+<script type='text/javascript' src='js/simple_move.js'></script>
+<style type="text/css">
+body, html {
+    font-family: 微软雅黑;
+}
+.ui-accordion-title {
+    background: none repeat scroll 0 0 #FEFEFE;
+    border-bottom: 1px solid #C5C5C5;
+    cursor: pointer;
+    display: block;
+    font-size: 15px;
+    height: 36px;
+    line-height: 36px;
+    overflow: hidden;
+    padding: 0 8px;
+    position: relative;
+    text-decoration: none;
+	
+}
+.ui-accordion-title.current {
+    background: none repeat scroll 0 0 #F2F2F2;
+    border-bottom: 1px solid #D6D6D6;
+    box-shadow: 0 2px 5px #DDDDDD;
+}
+.ui-accordion-icons {
+    background: url("img/layout.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    display: inline-block;
+    height: 14px;
+    position: absolute;
+    right: 8px;
+    top: 14px;
+    width: 14px;
+}
+.ui-accordion-icons.arrow-down {
+    background-position: -12px -131px;
+}
+.ui-accordion-icons.arrow-up {
+    background-position: -12px -151px;
+}
+.ui-accordion-content {overflow: hidden;}
+.ui-accordion-content .ui-accordion-items {
+    border-bottom: 1px solid #DDDDDD;
+    color: #888888;
+    display: block;
+    font-size: 13px;
+    height: 30px;
+    line-height: 30px;
+    outline: medium none;
+    padding: 0 4px 0 15px;
+    text-decoration: none;
+}
+</style>
+</head>
+<body>
+<div style="width:300px;padding:20px;height:400px;float:left" >
+	<div id="accordion" style="border:1px solid #ddd;">
+		<a class='ui-accordion-title current' tit>常用<span class="ui-accordion-icons arrow-down"></span></a>
+		<div class="ui-accordion-content">
+			<a class="ui-accordion-items" child-list tabindex=0 href="javascript:void(0)" url="development-bundle/demos/index.html">首页</a>
+		</div>
+		<a tit class='ui-accordion-title'>弹窗插件<span class="ui-accordion-icons arrow-down"></span></a>
+		<div class="ui-accordion-content">
+			<a class="ui-accordion-items" child-list tabindex=1 href="javascript:void(0)" url="development-bundle/demos/dialog/dialog.html">Dialog</a>
+			<a class="ui-accordion-items" child-list tabindex=2 href="javascript:void(0)" url="development-bundle/demos/alert/alert.html">Message</a>
+			<a class="ui-accordion-items" child-list tabindex=3 href="javascript:void(0)" url="development-bundle/demos/tooltip/tooltip.html">ToolTip</a>
+		</div>
+		<a tit class='ui-accordion-title'>导航插件<span class="ui-accordion-icons arrow-down"></span></a>
+		<div class="ui-accordion-content">
+			<a class="ui-accordion-items" child-list tabindex=5 href="javascript:void(0)" url="development-bundle/demos/tree/index.html">Tree</a>
+			<a class="ui-accordion-items" child-list href="javascript:void(0)">Accordion</a>
+		</div >
+		<a tit class='ui-accordion-title'>布局插件<span class="ui-accordion-icons arrow-down"></span></a>
+		<div class="ui-accordion-content">
+			<a class="ui-accordion-items" child-list tabindex=4 href="javascript:void(0)" url="development-bundle/demos/layout/simple.html">Layout</a>
+		</div>
+		<a tit class='ui-accordion-title'>按钮<span class="ui-accordion-icons arrow-down"></span></a>
+		<div class="ui-accordion-content">
+			<a class="ui-accordion-items" child-list tabindex=4 href="javascript:void(0)" url="development-bundle/demos/layout/simple.html">Layout</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		init();
+		$('#accordion').children('a.ui-accordion-title').click(function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$('#accordion').children('div.ui-accordion-content').css({height:0});
+			
+			if($(this).next().height() == 0){
+				$(this).children('span.ui-accordion-icons').removeClass('arrow-down').addClass('arrow-up');
+				var h = ($(this).next().children().length)*30;
+				var obj ={
+					height:h
+				}
+				move($(this).next().get(0),obj,function(){
+				},'ease');
+			}else{
+				$(this).children('span.ui-accordion-icons').removeClass('arrow-up').addClass('arrow-down');
+				var obj ={
+					height:0
+				}
+				move($(this).next().get(0),obj,function(){
+				},'ease');
+			}
+		})
+		
+	})
+	//第一项高亮
+	function init(){
+		var activeItem = $('#accordion').children('a.ui-accordion-title:eq(0)');
+		activeItem.addClass('current').siblings().removeClass('current');
+		activeItem.children('span.arrow-down').removeClass('arrow-down').addClass('arrow-up');
+		$('#accordion').children('div.ui-accordion-content').css({height:0});
+		$('#accordion').children('div.ui-accordion-content:eq(0)').css({height:'auto'});
+	}
+</script> 

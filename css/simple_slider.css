@@ -1,0 +1,44 @@
+/*
+* simple slider style
+* @date 2014.9.22
+* @author zhangz
+*/
+
+.line{
+	width:490px;
+	height:10px;
+	border-radius: 4px;
+	background: #25282A;
+	position: relative;
+}
+.bar{
+	position: absolute;
+	width:18px;
+	height:20px;
+	background: url(../img/slider_bar.png) left top no-repeat;
+	left:0px;
+	top:-50%;
+	cursor: pointer;
+}
+.line_pass{
+	width:0%;
+	background: #3370B0;
+	height:100%;
+	/*border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;*/
+	border-radius: 4px;
+}
+.sl_tooltip{
+	background: url(../img/tooltip_bg.png) left top no-repeat;
+	width:42px;
+	height:30px;
+	position: absolute;
+	top:-29px;
+	left:-70%;
+	color:#fff;
+	text-align:center;
+	line-height: 26px;
+	font-size: 12px;
+	display: none;
+
+}

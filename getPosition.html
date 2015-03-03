@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type='text/css' >
+	*{margin: 0;padding:0}
+	.box{
+	
+		width:600px;
+		height:600px;
+		background: pink;
+		margin:50px auto;
+		position: relative
+	}
+	.drag{
+		width:100px;
+		height:100px;
+		border:1px solid #eee;
+		position: absolute;
+		left:50px;
+		top:60px;
+		cursor:pointer;
+	}
+		
+	</style>
+	<script type='text/javascript'>
+		function  getPosition(obj){
+			var l=0;
+			var t=0;
+			while(obj){
+				l+=obj.offsetLeft;
+				t+=obj.offsetTop;
+				obj=obj.offsetParent;
+			}
+			return {left:l, top:t};
+
+		}
+		window.onload = function(){
+			var box = document.getElementById('box');
+			var drag = document.getElementById('drag');
+			console.log(box);
+			console.log(getPosition(box));
+			console.log(getPosition(drag));
+
+		}
+	</script>
+</head>
+	
+<body>
+	<div class='box' id='box'>
+		<div class='drag' id='drag'>
+		
+		</div>
+	</div>
+</body>
+</html>

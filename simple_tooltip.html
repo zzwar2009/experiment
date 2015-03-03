@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type='text/css' >
+	*{margin: 0;padding:0}
+	input {
+		outline:none;
+		padding:0;
+		margin: 0;
+	}
+	body{
+		padding  :100px;
+	}
+	a{
+		color:#ba2636;
+		cursor: pointer;
+	}
+	</style>
+	<link type="text/css" rel="stylesheet" href="css/simple_tooltip.css"  />
+	<script type='text/javascript' src='js/jquery.js'></script>
+	<script type='text/javascript' src='js/simple_util.js'></script>
+	<script type='text/javascript' src='js/simple_tooltip.js'></script>
+	<script type='text/javascript'>
+		$(function(){
+
+			$('.tooltip').tooltip();
+			//bottom top 样式反了
+			$('#top').tooltip({
+				position:'top'
+			});
+			$('#left').tooltip({
+				position:'left'
+			});
+			$('#right').tooltip({
+				position:'right'
+			})
+
+		})
+	</script>
+</head>
+<body>
+	
+	<div class='tooltip_msg_cont'>9月21日晚间，中央纪委监察部网站发布消息：河南省人大常委会党组书记、副主任秦玉海涉嫌严重违纪违法，目前正接受组织调查。除了“官员”的身份，近年来，秦玉海常以“摄影师”的身份出席各种社交活动。他在中国美术馆办过摄影展，作品被中国美术馆收藏，部分作品曾悬挂在北京的地铁各条线路内。据最新报道，北京地铁内的秦玉海摄
+		<div class='tooltip_trangle top'>
+			<i class='wrap_t'></i><i class='inner_t'></i>
+		</div>		
+	</div>
+	<div class='tooltip_msg_cont'>9月21日晚间，中央纪委监察部网站发布消息：河南省人大常委会党组书记、副主任秦玉海涉嫌严重违纪违法，目前正接受组织调查。除了“官员”的身份，近年来，秦玉海常以“摄影师”的身份出席各种社交活动。他在中国美术馆办过摄影展，作品被中国美术馆收藏，部分作品曾悬挂在北京的地铁各条线路内。据最新报道，北京地铁内的秦玉海摄
+		<div class='tooltip_trangle bottom'>
+			<i class='wrap_t'></i><i class='inner_t'></i>
+		</div>		
+	</div>
+	<div class='tooltip_msg_cont'>9月21日晚间，中央纪委监察部网站发布消息：河南省人大常委会党组书记、副主任秦玉海涉嫌严重违纪违法，目前正接受组织调查。除了“官员”的身份，近年来，秦玉海常以“摄影师”的身份出席各种社交活动。他在中国美术馆办过摄影展，作品被中国美术馆收藏，部分作品曾悬挂在北京的地铁各条线路内。据最新报道，北京地铁内的秦玉海摄
+		<div class='tooltip_trangle left'>
+			<i class='wrap_t'></i><i class='inner_t'></i>
+		</div>		
+	</div>
+	<div class='tooltip_msg_cont'>9月21日晚间，中央纪委监察部网站发布消息：河南省人大常委会党组书记、副主任秦玉海涉嫌严重违纪违法，目前正接受组织调查。除了“官员”的身份，近年来，秦玉海常以“摄影师21日晚间，中央纪委监察部网站发布消息：河南省人大常委会党组书记、副主任秦玉海涉嫌严重违纪违法，目前正接受组织调查。除了“官员”的身份，近年来，秦玉海常以“摄影师”的身份出席各种21日晚间，中央纪委监察部网站发布消息：河南省人大常委会党组书记、副主任秦玉海涉嫌严重违纪违法，目前正接受组织调查。除了“官员”的身份，近年来，秦玉海常以“摄影师”的身份出席各种21日晚间，中央纪委监察部网站发布消息：河南省人大常委会党组书记、副主任秦玉海涉嫌严重违纪违法，目前正接受组织调查。除了“官员”的身份，近年来，秦玉海常以“摄影师”的身份出席各种”的身份出席各种社交活动。他在中国美术馆办过摄影展，作品被中国美术馆收藏，部分作品曾悬挂在北京的地铁各条线路内。据最新报道，北京地铁内的秦玉海摄
+		<div class='tooltip_trangle right'>
+			<i class='wrap_t'></i><i class='inner_t'></i>
+		</div>		
+	</div>
+	<p>了“官员”的身份，近年来，秦玉海常<a class='tooltip' tooltip='，过摄影展，作品被中国'>以“摄影师”的</a>身份出席各种21日晚间，中央纪委监察部网站发布消息：河南省人大常委会党组书记、副主任秦玉海涉嫌严重违纪违法，目前正接受组织调查。除了“官员”的身份，近年来，秦玉海常以“摄影师”的身份出席各种21日晚间，中央纪委监察部网站发布消息：河南省人大常委会党组书记、副主任秦玉海涉嫌严重违纪违法，目前正接受组织调查。除了“官员”的身份，近年来，秦玉海常以“摄影师”的身份出席各种”的身份<a class='tooltip' tooltip='hello' id='top'>出席各</a>种社交活动。品被中国美术馆收藏，部分作品曾悬挂在北京的地铁各条</p>
+	<input type='text' id='left' tooltip='验证错误'/></br>
+	<input type='text' id='right' tooltip='请输入标题'/>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>slider</title>
+	<style type='text/css' >
+	*{margin: 0;padding:0}
+	body{
+		padding:300px;
+	}
+	#slider1{
+		margin-top: 30px;
+	}
+	</style>
+	<link type="text/css" rel="stylesheet" href="css/simple_slider.css"  />
+	<script type='text/javascript' src='js/jquery.js'></script>
+	<script type='text/javascript' src='js/simple_dragable.js'></script>
+	<script type='text/javascript' src='js/simple_slider.js'></script>
+	<script type='text/javascript'>
+			$(document).ready(function(){
+			/*
+			var maxwidth = $('.line').width()-$('.bar').width();
+			$('.bar').dragable({
+				limit:true,
+				vertical:false,
+				ondragmove :function(dom){
+					//console.log($(dom).left());
+
+					var percent = Math.round((dom.offsetLeft/maxwidth)*100)+'%'
+					$('.line_pass').width(percent);
+					$('.sl_tooltip').show().html(percent);
+				}
+			});*/
+			$('#slider').slider({
+
+			});
+			$('#slider1').slider({
+
+			});
+						
+		})
+		
+	</script>
+</head>
+<body>
+<!--
+	<div class='line'>
+		<div class='line_pass'>
+		</div>
+		<div class='bar'>
+			<div class='sl_tooltip'>
+				
+			</div>	
+		</div>
+
+	</div>
+-->
+	<div class='slider'  id = 'slider'></div>
+	<div class='slider'  id = 'slider1'></div>
+</body>
+</html>

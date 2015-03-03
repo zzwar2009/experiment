@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test js</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type='text/javascript'>
+   //var json = (new Function("","return"+info))(); 解析json
+
+	//组合继承
+	/*
+	function SuperType(name){
+		this.name = name;
+		this.colors =['a','b','c']
+	};
+	SuperType.prototype.sayName = function(){
+		alert(this.name);
+	}
+
+
+
+	function SubType(name,age){
+		
+		SuperType.call(this,name);
+		this.age = age;
+		
+	}
+
+	SubType.prototype  = new SuperType();
+	console.log(SubType.prototype.constructor);
+	SubType.prototype.constructor = SubType;
+	console.log(SubType.prototype.constructor);
+	SubType.prototype.sayAge = function (){
+		alert(this.age);
+	}
+	console.log(SuperType.prototype);
+	console.log(SubType.prototype);
+	var instance =  new SubType('zhangsan',22);
+	instance.colors.push('d');
+	instance.sayName();
+	instance.sayAge();
+	console.log(instance.colors);
+
+
+	var instance1 =  new SubType('zhan2gsan',223);
+	instance1.colors.push('e');
+	instance1.sayName();
+	instance1.sayAge();
+	console.log(instance1.colors);
+
+	*/
+
+   window.onload = function (){
+
+   		var drag = document.getElementById('drag');
+   		drag.ondragstart =function(){
+
+   			this.style.background = 'green';
+   		}
+   		var i=0;
+   		drag.ondrag = function (){
+   			//开始与结束连续触发
+   			document.title = i++
+
+   		}
+   		drag.ondragend = function(){
+
+   			this.style.background ='yellow';
+   		}
+   		drag.ondragenter= function(){
+
+   			this.style.background ='blue';
+   		}
+   		drag.ondragleave = function (){
+
+
+   		}
+   		drag.ondragover = function (ev){
+   			//enter  leave之间连续触发 
+   			ev.preventDefault();
+   		}
+
+   		drag.ondrop = function(){
+
+   			alert(112)
+   		}
+
+   }
+   window.onhashchange= function(){
+
+   		window.location.hash.substring(1)	
+   }
+   function randomNum(iall,inow){
+   	var arr=[];
+   	var newArr =[];
+   	for(var i=1;i<iall;i++){
+
+   		arr.push(i);
+   	}
+   	for(i=0;i<inow;i++){
+
+   		newArr.push(arr.splice(Math.floor(Math.random()*arr.length),1).toString());
+   	}
+   		return newArr;
+   }
+</script>
+
+<div  id='drag' draggable ='true' style='width:100px;height:100px;background:red'>拖拽</div>

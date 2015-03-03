@@ -1,0 +1,131 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+img {
+  border: none;
+}
+input,
+select,
+textarea {
+  outline: none;
+  border: none;
+  background: none;
+}
+textarea {
+  resize: none;
+}
+a {
+  text-decoration: none;
+}
+.box {
+  width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  -webkit-border-radius: 20px 0 20px 0;
+  -moz-border-radius: 20px 0 20px 0;
+  border-radius: 20px 0 20px 0;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 0px 5px #999999;
+  -moz-box-shadow: 0px 0px 5px #999999;
+  box-shadow: 0px 0px 5px #999999;
+}
+.title {
+  height: 80px;
+  background-color: #e9eaf0;
+  border-bottom: #d5d6dc solid 1px;
+  padding: 0 34px;
+}
+.title h3 {
+  height: 80px;
+  line-height: 80px;
+  font-family: "Microsoft Yahei", "微软雅黑";
+  font-weight: normal;
+  font-size: 20px;
+  float: left;
+  display: inline;
+}
+.title .opention {
+  float: right;
+  display: inline;
+  height: 100%;
+}
+.title .opention a {
+  width: 11px;
+  height: 20px;
+  display: inline-block;
+  background-color: #ccc;
+  margin-top: 30px;
+}
+.opention{
+  cursor: pointer;
+}
+.title .opention .simple_date_prev {
+  background: url("../img/prev.png") 0 0 no-repeat;
+}
+.title .opention .simple_date_next {
+  background: url("../img/next.png") 0 0 no-repeat;
+  margin-left: 30px;
+}
+.cont {
+  padding: 10px 0;
+ 
+}
+.ani{
+  opacity: 0.1;
+  -moz-transform:scale(0.2,0.2);  
+  -webkit-transform:scale(0.2,0.2);  
+  -o-transform:scale(0.2,0.2);
+}
+.list {
+  transition: all ease-in-out .5s;
+  *zoom: 1;
+  padding-left: 25px;
+}
+.list:before,
+.list:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.list:after {
+  clear: both;
+}
+.list li {
+  float: left;
+  display: inline;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  line-height: 44px;
+  border: #cdd0dd solid 1px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-family: "Microsoft Yahei", "微软雅黑";
+}
+.list .pass {
+  border-color: #ebeefb;
+  color: #b8bcce;
+}
+.list .active {
+  background-color: #ff8263;
+  border-color: #ff8263;
+  color: #FFF;
+}
+.list .week {
+	color:#e02d2d
+}
+.one li {
+  border-color: #FFF;
+  color: #91d9ff;
+  font-family: "Microsoft Yahei", "微软雅黑";
+  font-weight: bold;
+}

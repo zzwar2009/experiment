@@ -1,0 +1,61 @@
+/*
+* simple dialog
+* @date 2016.6.25
+* @author zhangz
+*/
+.simple_check_wrapper ,.simple_radio_wrapper{
+	display: inline-block;
+	width:22px;
+	height:22px;
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	border: none;
+	cursor: pointer;
+	
+	position: relative;
+}
+.simple_style_blue{
+	background:url(../img/blue.png) no-repeat;
+}
+.simple_style_green{
+	background:url(../img/green.png) no-repeat;
+}
+.simple_style_red{
+	background:url(../img/red.png) no-repeat;
+}
+.simple_check_wrapper{
+	background-position: 0px 0px ;
+}
+.simple_radio_wrapper{
+	background-position: -120px 0;
+}
+.simple_check_wrapper input[type='checkbox'],.simple_radio_wrapper input[type='radio'] {
+	position: absolute;
+	top: -20%;
+	left: -20%;
+	display: block;
+	width: 140%;
+	height: 140%;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	opacity: 0;
+	background: rgb(255, 255, 255);
+
+}
+.simple_check_wrapper.hover{
+	background-position: -24px 0;
+}
+.simple_check_wrapper.check{
+	background-position: -48px 0;
+}
+.simple_radio_wrapper.hover{
+	background-position: -144px 0;
+}
+.simple_radio_wrapper.check{
+	background-position: -168px 0;
+}
+label{
+	vertical-align: top;
+}

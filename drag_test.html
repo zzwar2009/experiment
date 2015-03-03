@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>simple drag</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<style type="text/css">
+body{margin:0px;padding:0px}
+.drag{width:100px;height:100px;
+margin:0px;padding:0px;background:#e6e6e6;text-align:center;position:absolute;line-height:100px;vertical-align:middle;}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#drag').mousedown(down);
+	})
+	
+	function down(e){
+		var mp = {x:0,y:0};
+		var ep = {x:0,y:0};
+		mp.x = e.pageX;mp.y = e.pageY;
+		var offset = $(this).offset();
+		ep.x = offset.left;ep.y = offset.top;
+		//保存鼠标位置
+		this.mp = mp;
+		//保存dom位置
+		this.ep = ep;
+		if(this.setCapture){
+			this.setCapture();
+			$(this).on('mousemove',move);
+			$(this).on('mouseup',up);
+		}else{
+			var that = this;
+			$(document).on('mousemove','#drag',move);
+			$(document).on('mouseup','#drag',up);
+		}
+	}
+	
+	function move(e){
+		var left = this.ep.x+(e.pageX-this.mp.x);
+		var top = this.ep.y+(e.pageY-this.mp.y);
+		$(this).css({
+			left:left,
+			top:top
+		})
+	}
+	function up(e){
+		if(this.releaseCapture){
+			$(this).off('mousemove');
+			$(this).off('mouseup');
+			this.releaseCapture();
+		}else{
+			$(document).off('mousemove');
+			$(document).off('mouseup');
+		}
+	}
+</script>
+</head>
+<body>
+<div id="drag" class="drag">drag</div>
+</body>
+</html>

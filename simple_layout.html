@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>simple layout</title>
+<link rel="stylesheet" href="css/simple_layout.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/simple_layout.js"></script>
+<style type='text/css'>
+	.box{
+		width:800px;
+		height:500px;
+		border:1px solid #ddd;
+		margin:20px auto;
+	}
+	.spanel{
+		height:20px;
+		width:800px;
+		border:1px solid #ddd;
+		margin:20px auto;
+		line-height:20px;
+		font-size: 0px;
+	}
+	.spanel span{
+		margin-right: 10px;
+		padding:0px 5px;
+		text-align: center;
+		background:#51B6FD;
+		display: inline-block;
+		font-size:12px;
+		color:#fff;
+		cursor:pointer;
+	}
+</style>
+</head>
+<body>
+	<div class='spanel'>
+		<span type="bz" id='bz'>标准</span>
+		<span type="zyb">左右有title</span>
+		<span type="zy">左右无title</span>
+		<span type="szxnz">上左右(left无title)</span>
+		<span type="szyng">上左右不关闭</span>
+		<span type="szyz">上左右可折叠</span>
+		<span type="center">单一布局</span>
+	</div>
+	<div class="box">
+		<div id="head">
+			<h1 class="simple_layout_tit">布局<h1>
+		</div>
+		<div id="left"></div>
+		<div id="separater"></div>
+		<div id="bottom"></div>
+		<div id="right">测试</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	var box = $('.box');
+	$('.spanel span').click(function(){
+		box.html('');
+		var type = ($(this).attr('type'));
+		var opt ;
+		switch(type)
+		{
+		case 'bz'://标准
+			opt = {head:{
+				target:"#head"
+				},
+				left:{
+					target:"#left",
+					collapse:true,
+					width:200,
+					title:"我的菜单"
+				},
+				separater:{
+					target:"#separater",
+					thin:true//是否窄边
+				},
+				bottom:{
+					target:"#bottom"
+				},
+				right:{
+					target:"#right"
+				}
+			};
+			box.append('<div id="head"><h1 class="simple_layout_tit">布局<h1></div><div id="left"></div><div id="separater"></div><div id="bottom"></div><div id="right">测试</div>');
+		  break;
+		case 'zyb'://左右有title
+		 	opt = {
+				left:{
+					target:"#left",
+					collapse:true,
+					width:200,
+					title:"我的菜单"
+				},
+				separater:{
+					target:"#separater",
+					thin:true//是否窄边
+				},
+				right:{
+					target:"#right"
+				}
+			};
+			box.append('<div id="left"></div><div id="separater"></div><div id="right">测试</div>');
+		  break;
+		case 'zy'://左右无title
+		 	opt = {
+				left:{
+					target:"#left",
+					collapse:true,
+					width:200
+				},
+				separater:{
+					target:"#separater",
+					thin:true//是否窄边
+				},
+				right:{
+					target:"#right"
+				}
+			};
+			box.append('<div id="left"></div><div id="separater"></div><div id="right">测试</div>');
+		  break;
+		case 'szxnz'://上左右(left无title)
+		 	opt = {head:{
+				target:"#head"
+				},
+				left:{
+					target:"#left",
+					collapse:true,
+					width:200
+				},
+				separater:{
+					target:"#separater",
+					thin:true//是否窄边
+				},
+				right:{
+					target:"#right"
+				}
+			};
+			box.append('<div id="head"><h1 class="simple_layout_tit">布局<h1></div><div id="left"></div><div id="separater"></div><div id="right">测试</div>');
+		  break;
+		case 'szyng'://上左右不关闭
+		 	opt = {head:{
+				target:"#head"
+				},
+				left:{
+					target:"#left",
+					collapse:false,
+					width:200,
+					title:"我的菜单"
+				},
+				separater:{
+					target:"#separater",
+					thin:true//是否窄边
+				},
+				right:{
+					target:"#right"
+				}
+			};
+			box.append('<div id="head"><h1 class="simple_layout_tit">布局<h1></div><div id="left"></div><div id="separater"></div><div id="right">测试</div>');
+		  break;
+		case 'szyz'://上左右可折叠
+		 	opt = {head:{
+				target:"#head"
+				},
+				left:{
+					target:"#left",
+					collapse:true,
+					width:200,
+					title:"我的菜单"
+				},
+				separater:{
+					target:"#separater",
+					thin:true//是否窄边
+				},
+				right:{
+					target:"#right"
+				}
+			};
+			box.append('<div id="head"><h1 class="simple_layout_tit">布局<h1></div><div id="left"></div><div id="separater"></div><div id="right">测试</div>');
+		  break;
+		case 'center'://单一布局
+		 	opt = {
+				right:{
+					target:"#right"
+				}
+			};
+			box.append('<div id="right">测试</div>');
+		  break;
+		default:
+		 	opt = {
+				right:{
+					target:"#right"
+				}
+			};
+			box.append('<div id="right">测试</div>');
+		}
+		box.layout(opt);
+	})
+	$('#bz').click();
+})
+</script>

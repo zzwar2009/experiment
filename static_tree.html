@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>simple static tree</title>
+	<script type='text/javascript' src='js/jquery.js'></script>
+	<style type='text/css'>
+		*{margin:0;padding:0;}
+		ul,li {list-style: none}
+        .box{
+        	width:300px;
+        	height:500px;
+        	border:1px solid #ccc;
+        	margin:50px auto;
+        }
+        .treeview{
+			font-family: tahoma, arial, 宋体;
+			color: rgb(51, 51, 51);
+			padding:5px 0px;
+        }
+        .treeview.root{
+        	padding:5px;
+        }
+        .treenode{
+			display:block;
+			font-size: 0px;
+			padding: 4px 0;
+        }
+        .tree_icon,.tree_root{
+        	background: url(img/tree_test.gif)  no-repeat;
+        }
+        .tree_txt,.tree_icon,.tree_root{
+        	vertical-align: middle;
+        	font-size: 12px;
+        }
+        .tree_root{
+        	display: inline-block;
+			width: 15px;
+			height: 15px;
+			cursor: pointer;
+        }
+        .tree_item:hover{
+        	background:#f4f9fd;
+        	border-color:#e5f0fb;
+        	cursor: pointer;
+        }
+        .tree_root.minus{
+			background-position: -45px -203px;
+			
+        }
+        .tree_root.loading{
+			background: url(img/tree_loading.gif)  no-repeat;
+        }
+        .tree_root.plus{
+			background-position: -45px -180px;
+        }
+        
+        .tree_icon{
+			display: inline-block;
+			width: 22px;
+			height: 18px;
+			margin-right: 5px;
+			background-position: -1px -205px;
+			vertical-align: top;
+        }
+        .tree_txt{
+			display: inline-block;
+			font-size: 12px;
+			
+        }
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.tree_root').off('click').on('click',function(){
+				var s = $(this).parent().parent().siblings('.treeview');
+				var dom = $(this);
+ 				if(dom.hasClass('plus')){
+ 					dom.removeClass('plus').addClass('loading');
+ 					setTimeout(function(){
+ 						dom.removeClass('loading').addClass('minus');
+ 						s.show();
+ 					},300)
+ 				}else{
+ 					s.hide();
+ 					dom.removeClass('minus').addClass('plus');
+ 				}
+			})
+
+		})
+	</script>
+</head>
+<body>
+	<div class="box">
+		<ul class="treeview root">
+			<li class="">
+				<div  class='tree_item' style=''>
+					<a class='treenode'>
+						<em class='tree_root minus'></em>
+	   					<span class='tree_icon'></span>
+	   					<span class='tree_txt'>树节点</span>
+					</a>
+				</div>
+				<ul class="treeview" >
+					
+					<li class="">
+						<div class='tree_item' style='padding-left: 15px;'>
+							<a class='treenode'>
+								<em class='tree_root plus'></em>
+			   					<span class='tree_icon'></span>
+			   					<span class='tree_txt'>树节点</span>
+							</a>
+						</div>
+					</li>
+				
+					<li class="">
+						<div class='tree_item' style='padding-left: 15px;'>
+							<a class='treenode'>
+								<em class='tree_root plus'></em>
+			   					<span class='tree_icon'></span>
+			   					<span class='tree_txt'>树节点</span>
+							</a>
+						</div>
+					</li>
+					<li class="">
+						<div class='tree_item' style='padding-left: 15px;'>
+							<a class='treenode'>
+								<em class='tree_root plus'></em>
+			   					<span class='tree_icon'></span>
+			   					<span class='tree_txt'>树节点</span>
+							</a>
+						</div>
+					</li>
+					<li class="">
+						<div class='tree_item' style='padding-left: 15px;'>
+							<a class='treenode'>
+								<em class='tree_root plus'></em>
+			   					<span class='tree_icon'></span>
+			   					<span class='tree_txt'>树节点</span>
+							</a>
+						</div>
+					</li>
+					<li class="">
+						<div class='tree_item' style='padding-left: 15px;'>
+							<a class='treenode'>
+								<em class='tree_root plus'></em>
+			   					<span class='tree_icon'></span>
+			   					<span class='tree_txt'>树节点</span>
+							</a>
+						</div>
+					</li>
+					<li class="">
+						<div class='tree_item' style='padding-left: 15px;'>
+							<a class='treenode'>
+								<em class='tree_root minus'></em>
+			   					<span class='tree_icon'></span>
+			   					<span class='tree_txt'>树节点</span>
+							</a>
+						</div>
+						<ul class="treeview" style=''>
+							<li class="">
+								<div class='tree_item' style='padding-left: 30px;'>
+									<a class='treenode'>
+										<em class='tree_root plus'></em>
+					   					<span class='tree_icon'></span>
+					   					<span class='tree_txt'>树节点</span>
+									</a>
+								</div>
+							</li>
+							<li class="">
+								<div class='tree_item' style='padding-left: 30px;'>
+									<a class='treenode'>
+										<em class='tree_root plus'></em>
+					   					<span class='tree_icon'></span>
+					   					<span class='tree_txt'>树节点</span>
+									</a>
+								</div>
+							</li>
+							<li class="">
+								<div class='tree_item' style='padding-left: 30px;'>
+									<a class='treenode'>
+										<em class='tree_root plus'></em>
+					   					<span class='tree_icon'></span>
+					   					<span class='tree_txt'>树节点</span>
+									</a>
+								</div>
+							</li>
+							
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+	</div>
+</body>
+</html>
